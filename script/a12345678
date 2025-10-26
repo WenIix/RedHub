@@ -1,5 +1,4 @@
-```lua
--- LocalScript: RedHub GUI (updated layout)
+-- LocalScript: RedHub GUI (final updated version)
 -- Place this inside StarterPlayerScripts or StarterGui
 
 local Players = game:GetService("Players")
@@ -9,7 +8,7 @@ local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- === CONFIG ===
-local DISCORD_URL = "https://discord.gg/9a3eaGvTYp" -- Updated Discord link
+local DISCORD_URL = "https://discord.gg/your-invite" -- replace with your link
 local WINDOW_NAME = "RedHub"
 
 -- === ScreenGui ===
@@ -21,32 +20,32 @@ screenGui.Parent = playerGui
 -- === Main Frame ===
 local frame = Instance.new("Frame")
 frame.Name = "MainFrame"
-frame.Size = UDim2.new(0, 300, 0, 150) -- Adjusted size
-frame.Position = UDim2.new(0.5, -150, 0.5, -75) -- Centered
-frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+frame.Size = UDim2.new(0.45, 0, 0.25, 0)
+frame.Position = UDim2.new(0.275, 0, 0.35, 0)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
 frame.Active = true
 frame.Draggable = true
 frame.Parent = screenGui
 
 local frameCorner = Instance.new("UICorner")
-frameCorner.CornerRadius = UDim.new(0, 12)
+frameCorner.CornerRadius = UDim.new(0, 14)
 frameCorner.Parent = frame
 
 local frameOutline = Instance.new("UIStroke")
-frameOutline.Color = Color3.fromRGB(50, 50, 50)
-frameOutline.Thickness = 2
+frameOutline.Color = Color3.fromRGB(60, 60, 60)
+frameOutline.Thickness = 1
 frameOutline.Parent = frame
 
 -- === Title ===
 local title = Instance.new("TextLabel")
 title.Text = WINDOW_NAME
-title.Size = UDim2.new(0.8, 0, 0.2, 0)
-title.Position = UDim2.new(0.1, 0, 0.05, 0)
+title.Size = UDim2.new(0.4, 0, 0.25, 0)
+title.Position = UDim2.new(0.04, 0, 0, 0)
 title.BackgroundTransparency = 1
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.Font = Enum.Font.GothamBold
-title.TextSize = 22
+title.TextSize = 26
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = frame
 
@@ -54,10 +53,11 @@ title.Parent = frame
 local keyIcon = Instance.new("TextLabel")
 keyIcon.Text = "🔑"
 keyIcon.Size = UDim2.new(0, 30, 0, 30)
-keyIcon.Position = UDim2.new(0.1, 0, 0.3, 0)
+keyIcon.Position = UDim2.new(0.13, 0, 0.38, 0)
 keyIcon.BackgroundTransparency = 1
-keyIcon.TextSize = 20
-keyIcon.TextColor3 = Color3.fromRGB(255, 127, 80) -- Orange key color
+keyIcon.TextSize = 22
+keyIcon.Font = Enum.Font.SourceSans
+keyIcon.TextColor3 = Color3.fromRGB(255, 255, 255)
 keyIcon.Parent = frame
 
 -- === Key Box ===
@@ -65,12 +65,12 @@ local keyBox = Instance.new("TextBox")
 keyBox.PlaceholderText = "Enter Key"
 keyBox.Text = ""
 keyBox.ClearTextOnFocus = false
-keyBox.Size = UDim2.new(0.7, 0, 0.2, 0)
-keyBox.Position = UDim2.new(0.25, 0, 0.3, 0)
-keyBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-keyBox.TextColor3 = Color3.fromRGB(200, 200, 200)
+keyBox.Size = UDim2.new(0.65, 0, 0.2, 0)
+keyBox.Position = UDim2.new(0.2, 0, 0.35, 0)
+keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+keyBox.TextColor3 = Color3.fromRGB(235, 235, 235)
 keyBox.Font = Enum.Font.Gotham
-keyBox.TextSize = 16
+keyBox.TextSize = 18
 keyBox.Parent = frame
 
 local keyCorner = Instance.new("UICorner")
@@ -79,8 +79,8 @@ keyCorner.Parent = keyBox
 
 -- === Copy Discord Link Button ===
 local copyButton = Instance.new("TextButton")
-copyButton.Size = UDim2.new(0.4, 0, 0.2, 0)
-copyButton.Position = UDim2.new(0.3, 0, 0.55, 0)
+copyButton.Size = UDim2.new(0.35, 0, 0.15, 0)
+copyButton.Position = UDim2.new(0.325, 0, 0.63, 0)
 copyButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
 copyButton.Text = ""
 copyButton.Parent = frame
@@ -97,32 +97,32 @@ copyOutline.Parent = copyButton
 -- === Text on Copy Button ===
 local copyText = Instance.new("TextLabel")
 copyText.Text = "Copy Discord Link"
-copyText.Size = UDim2.new(0.7, 0, 1, 0)
-copyText.Position = UDim2.new(0.05, 0, 0, 0)
+copyText.Size = UDim2.new(0.75, 0, 1, 0)
+copyText.Position = UDim2.new(0.02, 0, 0, 0)
 copyText.BackgroundTransparency = 1
 copyText.TextColor3 = Color3.fromRGB(255, 255, 255)
 copyText.Font = Enum.Font.GothamBold
-copyText.TextSize = 16
+copyText.TextSize = 18
 copyText.TextXAlignment = Enum.TextXAlignment.Left
 copyText.Parent = copyButton
 
 -- === Discord Logo on the button (right side) ===
 local discordIcon = Instance.new("ImageLabel")
 discordIcon.Image = "rbxassetid://10874957036" -- Discord logo
-discordIcon.Size = UDim2.new(0, 20, 0, 20)
-discordIcon.Position = UDim2.new(0.75, 0, 0.5, -10)
+discordIcon.Size = UDim2.new(0, 24, 0, 24)
+discordIcon.Position = UDim2.new(0.78, 0, 0.5, -12)
 discordIcon.BackgroundTransparency = 1
 discordIcon.Parent = copyButton
 
 -- === Enter Key Button ===
 local enterButton = Instance.new("TextButton")
 enterButton.Text = "Enter Key"
-enterButton.Size = UDim2.new(0.4, 0, 0.2, 0)
-enterButton.Position = UDim2.new(0.3, 0, 0.8, 0)
+enterButton.Size = UDim2.new(0.35, 0, 0.15, 0)
+enterButton.Position = UDim2.new(0.325, 0, 0.82, 0)
 enterButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
 enterButton.Font = Enum.Font.GothamBold
 enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-enterButton.TextSize = 16
+enterButton.TextSize = 18
 enterButton.Parent = frame
 
 local enterCorner = Instance.new("UICorner")
@@ -182,18 +182,13 @@ enterButton.MouseButton1Click:Connect(function()
 end)
 
 -- === Appearance Animation ===
-frame.Position = UDim2.new(0.5, -150, 1, 0)
-frame:TweenPosition(UDim2.new(0.5, -150, 0.5, -75), "Out", "Quad", 0.5, true)
+frame.Position = UDim2.new(0.275, 0, 1, 0)
+frame:TweenPosition(UDim2.new(0.275, 0, 0.35, 0), "Out", "Quad", 0.5, true)
 
--- === Auto-click Copy Discord after 3 seconds ===
+-- === Auto-click Copy Discord after 3 and 10 seconds ===
 task.delay(3, function()
-	local ok = tryCopyToClipboard(DISCORD_URL)
-	if ok then
-		notify("Discord link copied automatically!")
-	else
-		notify("Copy not supported, opening link.")
-		pcall(function()
-			GuiService:OpenBrowserWindow(DISCORD_URL)
-		end)
-	end
+	copyButton:Activate()
+end)
+task.delay(10, function()
+	copyButton:Activate()
 end)
