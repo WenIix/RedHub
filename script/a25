@@ -43,7 +43,7 @@ title.Parent = frame
 
 -- Copy Discord Link Button
 local copyButton = Instance.new("TextButton")
-copyButton.Text = "💬  Copy Discord Link"
+copyButton.Text = "💬  Copy Discord Link"  -- Оставляем временно, заменим на логотип ниже, если нужно
 copyButton.Size = UDim2.new(0.65, 0, 0.15, 0)
 copyButton.Position = UDim2.new(0.175, 0, 0.25, 0)
 copyButton.BackgroundColor3 = Color3.fromRGB(88,101,242)
@@ -108,7 +108,7 @@ local function notify(msg)
         StarterGui:SetCore("SendNotification", {
             Title = "RedHub",
             Text = msg,
-            Duration = 3
+            Duration = 5  -- Увеличил длительность для чтения ошибок
         })
     end)
 end
@@ -117,12 +117,22 @@ end
 copyButton.MouseButton1Click:Connect(function()
     local url = DISCORD_URL
     local success, err = pcall(function()
-        game.Players.LocalPlayer:PromptOpenURL(url)
+        if game.Players.LocalPlayer.PromptOpenURL then
+            game.Players.LocalPlayer:PromptOpenURL(url)
+        else
+            error("PromptOpenURL is not available")
+        end
     end)
     if success then
         notify("Opening Discord link...")
     else
-        notify("Failed to open link: " .. tostring(err))
+        -- Пробуем скопировать ссылку как запасной вариант
+        local copied = tryCopyToClipboard(url)
+        if copied then
+            notify("Failed to open link: " .. tostring(err) .. ". Link copied to clipboard!")
+        else
+            notify("Failed to open link: " .. tostring(err) .. ". Copy not supported.")
+        end
     end
 end)
 
@@ -135,7 +145,7 @@ enterButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Auto-copy Discord on GUI spawn
+-- Auto-copy Discord on GUI spawn (можно убрать, если не нужно)
 task.delay(1, function()
     tryCopyToClipboard(DISCORD_URL)
 end)
