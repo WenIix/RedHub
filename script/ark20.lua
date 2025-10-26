@@ -43,7 +43,7 @@ title.Parent = frame
 
 -- Copy Discord Link Button
 local copyButton = Instance.new("TextButton")
-copyButton.Text = "💬 Copy Discord Link"
+copyButton.Text = "💬  Copy Discord Link"
 copyButton.Size = UDim2.new(0.65, 0, 0.15, 0)
 copyButton.Position = UDim2.new(0.175, 0, 0.25, 0)
 copyButton.BackgroundColor3 = Color3.fromRGB(88,101,242)
@@ -132,8 +132,8 @@ enterButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Auto-copy Discord on GUI spawn (after 3 seconds)
-task.delay(3, function()
+-- Auto-copy Discord on GUI spawn
+task.delay(1, function()
     tryCopyToClipboard(DISCORD_URL)
 end)
 
