@@ -1,4 +1,4 @@
--- LocalScript: RedHub GUI (final clean version with auto-click)
+-- LocalScript: RedHub GUI (updated with Discord logo, button outline, custom font)
 -- Place this inside StarterPlayerScripts or StarterGui
 
 local Players = game:GetService("Players")
@@ -28,16 +28,16 @@ frame.Active = true
 frame.Draggable = true
 frame.Parent = screenGui
 
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 14)
-corner.Parent = frame
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 14)
+frameCorner.Parent = frame
 
-local outline = Instance.new("UIStroke")
-outline.Color = Color3.fromRGB(60, 60, 60)
-outline.Thickness = 1
-outline.Parent = frame
+local frameOutline = Instance.new("UIStroke")
+frameOutline.Color = Color3.fromRGB(60, 60, 60)
+frameOutline.Thickness = 2
+frameOutline.Parent = frame
 
--- === Title (top-left corner) ===
+-- === Title ===
 local title = Instance.new("TextLabel")
 title.Text = WINDOW_NAME
 title.Size = UDim2.new(0.4, 0, 0.25, 0)
@@ -49,14 +49,14 @@ title.TextSize = 26
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = frame
 
--- === Key Icon (🔑) ===
+-- === Key Icon ===
 local keyIcon = Instance.new("TextLabel")
 keyIcon.Text = "🔑"
 keyIcon.Size = UDim2.new(0, 30, 0, 30)
 keyIcon.Position = UDim2.new(0.13, 0, 0.38, 0)
 keyIcon.BackgroundTransparency = 1
 keyIcon.TextSize = 22
-keyIcon.Font = Enum.Font.SourceSans
+keyIcon.Font = Enum.Font.GothamBold
 keyIcon.TextColor3 = Color3.fromRGB(255, 255, 255)
 keyIcon.Parent = frame
 
@@ -77,6 +77,11 @@ local keyCorner = Instance.new("UICorner")
 keyCorner.CornerRadius = UDim.new(0, 8)
 keyCorner.Parent = keyBox
 
+local keyOutline = Instance.new("UIStroke")
+keyOutline.Color = Color3.fromRGB(80, 80, 80)
+keyOutline.Thickness = 2
+keyOutline.Parent = keyBox
+
 -- === Copy Discord Button ===
 local copyButton = Instance.new("TextButton")
 copyButton.Text = "Copy Discord"
@@ -92,16 +97,18 @@ local copyCorner = Instance.new("UICorner")
 copyCorner.CornerRadius = UDim.new(0, 10)
 copyCorner.Parent = copyButton
 
--- === Discord Icon on the button ===
-local discordIcon = Instance.new("TextLabel")
-discordIcon.Text = "💬"
+local copyOutline = Instance.new("UIStroke")
+copyOutline.Color = Color3.fromRGB(50, 50, 50)
+copyOutline.Thickness = 2
+copyOutline.Parent = copyButton
+
+-- === Discord Logo Icon on the button ===
+local discordIcon = Instance.new("ImageLabel")
+discordIcon.Image = "rbxassetid://10874957036" -- Discord logo image
 discordIcon.Size = UDim2.new(0, 28, 0, 28)
-discordIcon.Position = UDim2.new(0.33, -35, 0.63, 0)
+discordIcon.Position = UDim2.new(0.1, 0, 0.1, 0)
 discordIcon.BackgroundTransparency = 1
-discordIcon.TextSize = 22
-discordIcon.Font = Enum.Font.SourceSansBold
-discordIcon.TextColor3 = Color3.fromRGB(255, 255, 255)
-discordIcon.Parent = frame
+discordIcon.Parent = copyButton
 
 -- === Helper Functions ===
 local function tryCopyToClipboard(text)
@@ -139,15 +146,6 @@ copyButton.MouseButton1Click:Connect(function()
 	pcall(function()
 		GuiService:OpenBrowserWindow(DISCORD_URL)
 	end)
-end)
-
-enterButton.MouseButton1Click:Connect(function()
-	local key = keyBox.Text
-	if key == "" then
-		notify("Please enter a key!")
-	else
-		notify("Key entered: " .. key)
-	end
 end)
 
 -- === Appearance Animation ===
