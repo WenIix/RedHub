@@ -1,4 +1,4 @@
--- LocalScript: RedHub GUI (updated version)
+-- LocalScript: RedHub GUI (updated layout)
 -- Place this inside StarterPlayerScripts or StarterGui
 
 local Players = game:GetService("Players")
@@ -28,14 +28,14 @@ frame.Active = true
 frame.Draggable = true
 frame.Parent = screenGui
 
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 14)
-corner.Parent = frame
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 14)
+frameCorner.Parent = frame
 
-local outline = Instance.new("UIStroke")
-outline.Color = Color3.fromRGB(60, 60, 60)
-outline.Thickness = 1
-outline.Parent = frame
+local frameOutline = Instance.new("UIStroke")
+frameOutline.Color = Color3.fromRGB(60, 60, 60)
+frameOutline.Thickness = 1
+frameOutline.Parent = frame
 
 -- === Title ===
 local title = Instance.new("TextLabel")
@@ -79,14 +79,10 @@ keyCorner.Parent = keyBox
 
 -- === Copy Discord Link Button ===
 local copyButton = Instance.new("TextButton")
-copyButton.Text = "Copy Discord Link"
-copyButton.Size = UDim2.new(0.25, 0, 0.15, 0)
-copyButton.Position = UDim2.new(0.375, 0, 0.63, 0)
+copyButton.Size = UDim2.new(0.35, 0, 0.15, 0)
+copyButton.Position = UDim2.new(0.325, 0, 0.63, 0)
 copyButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
-copyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-copyButton.Font = Enum.Font.GothamBold
-copyButton.TextSize = 18
-copyButton.TextXAlignment = Enum.TextXAlignment.Left
+copyButton.Text = ""
 copyButton.Parent = frame
 
 local copyCorner = Instance.new("UICorner")
@@ -98,13 +94,45 @@ copyOutline.Color = Color3.fromRGB(50, 50, 50)
 copyOutline.Thickness = 2
 copyOutline.Parent = copyButton
 
--- === Discord Logo on the button ===
+-- === Text on Copy Button ===
+local copyText = Instance.new("TextLabel")
+copyText.Text = "Copy Discord Link"
+copyText.Size = UDim2.new(0.75, 0, 1, 0)
+copyText.Position = UDim2.new(0.02, 0, 0, 0)
+copyText.BackgroundTransparency = 1
+copyText.TextColor3 = Color3.fromRGB(255, 255, 255)
+copyText.Font = Enum.Font.GothamBold
+copyText.TextSize = 18
+copyText.TextXAlignment = Enum.TextXAlignment.Left
+copyText.Parent = copyButton
+
+-- === Discord Logo on the button (right side) ===
 local discordIcon = Instance.new("ImageLabel")
 discordIcon.Image = "rbxassetid://10874957036" -- Discord logo
 discordIcon.Size = UDim2.new(0, 24, 0, 24)
-discordIcon.Position = UDim2.new(0.03, 0, 0.5, -12)
+discordIcon.Position = UDim2.new(0.78, 0, 0.5, -12)
 discordIcon.BackgroundTransparency = 1
 discordIcon.Parent = copyButton
+
+-- === Enter Key Button ===
+local enterButton = Instance.new("TextButton")
+enterButton.Text = "Enter Key"
+enterButton.Size = UDim2.new(0.35, 0, 0.15, 0)
+enterButton.Position = UDim2.new(0.325, 0, 0.82, 0)
+enterButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+enterButton.Font = Enum.Font.GothamBold
+enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+enterButton.TextSize = 18
+enterButton.Parent = frame
+
+local enterCorner = Instance.new("UICorner")
+enterCorner.CornerRadius = UDim.new(0, 10)
+enterCorner.Parent = enterButton
+
+local enterOutline = Instance.new("UIStroke")
+enterOutline.Color = Color3.fromRGB(50, 50, 50)
+enterOutline.Thickness = 2
+enterOutline.Parent = enterButton
 
 -- === Helper Functions ===
 local function tryCopyToClipboard(text)
@@ -143,21 +171,6 @@ copyButton.MouseButton1Click:Connect(function()
 		GuiService:OpenBrowserWindow(DISCORD_URL)
 	end)
 end)
-
--- === Enter Key Button ===
-local enterButton = Instance.new("TextButton")
-enterButton.Text = "Enter Key"
-enterButton.Size = UDim2.new(0.25, 0, 0.15, 0)
-enterButton.Position = UDim2.new(0.375, 0, 0.82, 0)
-enterButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
-enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-enterButton.Font = Enum.Font.GothamBold
-enterButton.TextSize = 18
-enterButton.Parent = frame
-
-local enterCorner = Instance.new("UICorner")
-enterCorner.CornerRadius = UDim.new(0, 10)
-enterCorner.Parent = enterButton
 
 enterButton.MouseButton1Click:Connect(function()
 	local key = keyBox.Text
