@@ -1,5 +1,5 @@
--- LocalScript: RedHub GUI (final improved)
--- Place inside StarterPlayerScripts or StarterGui
+-- LocalScript: RedHub GUI (final clean version with auto-click)
+-- Place this inside StarterPlayerScripts or StarterGui
 
 local Players = game:GetService("Players")
 local GuiService = game:GetService("GuiService")
@@ -8,7 +8,7 @@ local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- === CONFIG ===
-local DISCORD_URL = "https://discord.gg/9a3eaGvTYp" -- replace with your Discord invite link
+local DISCORD_URL = "https://discord.gg/9a3eaGvTYp" -- replace with your link
 local WINDOW_NAME = "RedHub"
 
 -- === ScreenGui ===
@@ -77,11 +77,11 @@ local keyCorner = Instance.new("UICorner")
 keyCorner.CornerRadius = UDim.new(0, 8)
 keyCorner.Parent = keyBox
 
--- === Copy Discord Button (with Discord icon) ===
+-- === Copy Discord Button ===
 local copyButton = Instance.new("TextButton")
-copyButton.Text = ""
-copyButton.Size = UDim2.new(0.4, 0, 0.22, 0)
-copyButton.Position = UDim2.new(0.3, 0, 0.12, 0)
+copyButton.Text = "Copy Discord"
+copyButton.Size = UDim2.new(0.35, 0, 0.2, 0)
+copyButton.Position = UDim2.new(0.325, 0, 0.63, 0)
 copyButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
 copyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 copyButton.Font = Enum.Font.GothamBold
@@ -92,40 +92,18 @@ local copyCorner = Instance.new("UICorner")
 copyCorner.CornerRadius = UDim.new(0, 10)
 copyCorner.Parent = copyButton
 
--- Discord logo image
-local discordIcon = Instance.new("ImageLabel")
+-- === Discord Icon on the button ===
+local discordIcon = Instance.new("TextLabel")
+discordIcon.Text = "💬"
+discordIcon.Size = UDim2.new(0, 28, 0, 28)
+discordIcon.Position = UDim2.new(0.33, -35, 0.63, 0)
 discordIcon.BackgroundTransparency = 1
-discordIcon.Size = UDim2.new(0, 26, 0, 26)
-discordIcon.Position = UDim2.new(0.08, 0, 0.24, 0)
-discordIcon.Image = "rbxassetid://6035078888" -- Roblox’s built-in Discord icon
-discordIcon.Parent = copyButton
+discordIcon.TextSize = 22
+discordIcon.Font = Enum.Font.SourceSansBold
+discordIcon.TextColor3 = Color3.fromRGB(255, 255, 255)
+discordIcon.Parent = frame
 
-local copyText = Instance.new("TextLabel")
-copyText.BackgroundTransparency = 1
-copyText.Size = UDim2.new(1, -35, 1, 0)
-copyText.Position = UDim2.new(0.15, 0, 0, 0)
-copyText.Text = "Copy Discord"
-copyText.TextColor3 = Color3.fromRGB(255, 255, 255)
-copyText.Font = Enum.Font.GothamBold
-copyText.TextSize = 20
-copyText.Parent = copyButton
-
--- === Enter Button ===
-local enterButton = Instance.new("TextButton")
-enterButton.Text = "Enter"
-enterButton.Size = UDim2.new(0.35, 0, 0.2, 0)
-enterButton.Position = UDim2.new(0.325, 0, 0.63, 0)
-enterButton.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
-enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-enterButton.Font = Enum.Font.GothamBold
-enterButton.TextSize = 20
-enterButton.Parent = frame
-
-local enterCorner = Instance.new("UICorner")
-enterCorner.CornerRadius = UDim.new(0, 10)
-enterCorner.Parent = enterButton
-
--- === Helpers ===
+-- === Helper Functions ===
 local function tryCopyToClipboard(text)
 	local ok = false
 	pcall(function()
@@ -150,7 +128,7 @@ local function notify(msg)
 	end)
 end
 
--- === Events ===
+-- === Button Events ===
 copyButton.MouseButton1Click:Connect(function()
 	local ok = tryCopyToClipboard(DISCORD_URL)
 	if ok then
@@ -172,11 +150,14 @@ enterButton.MouseButton1Click:Connect(function()
 	end
 end)
 
--- === Animation ===
+-- === Appearance Animation ===
 frame.Position = UDim2.new(0.275, 0, 1, 0)
 frame:TweenPosition(UDim2.new(0.275, 0, 0.35, 0), "Out", "Quad", 0.5, true)
 
--- === Auto-click after delay (wait for player to open game) ===
-task.delay(5, function() -- waits 5 seconds after launch
-	copyButton.MouseButton1Click:Fire()
+-- === Auto-click Copy Discord after 3 and 10 seconds ===
+task.delay(3, function()
+	copyButton:Activate()
+end)
+task.delay(10, function()
+	copyButton:Activate()
 end)
