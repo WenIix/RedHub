@@ -43,7 +43,7 @@ title.Parent = frame
 
 -- Copy Discord Link Button
 local copyButton = Instance.new("TextButton")
-copyButton.Text = "Discord Logo 💬  Copy Discord Link"
+copyButton.Text = "💬  Copy Discord Link"
 copyButton.Size = UDim2.new(0.65, 0, 0.15, 0)
 copyButton.Position = UDim2.new(0.175, 0, 0.25, 0)
 copyButton.BackgroundColor3 = Color3.fromRGB(88,101,242)
@@ -58,7 +58,7 @@ copyCorner.Parent = copyButton
 
 -- Key Box
 local keyBox = Instance.new("TextBox")
-keyBox.PlaceholderText = "(key in Discord server)"
+keyBox.PlaceholderText = "Enter the key... (key in Discord server)"
 keyBox.Text = ""
 keyBox.ClearTextOnFocus = false
 keyBox.Size = UDim2.new(0.65, 0, 0.15, 0)
