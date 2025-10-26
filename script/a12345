@@ -1,4 +1,4 @@
--- LocalScript: RedHub GUI (updated with Discord logo, button outline, custom font)
+-- LocalScript: RedHub GUI (updated version)
 -- Place this inside StarterPlayerScripts or StarterGui
 
 local Players = game:GetService("Players")
@@ -8,7 +8,7 @@ local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- === CONFIG ===
-local DISCORD_URL = "https://discord.gg/9a3eaGvTYp" -- replace with your link
+local DISCORD_URL = "https://discord.gg/your-invite" -- replace with your link
 local WINDOW_NAME = "RedHub"
 
 -- === ScreenGui ===
@@ -28,14 +28,14 @@ frame.Active = true
 frame.Draggable = true
 frame.Parent = screenGui
 
-local frameCorner = Instance.new("UICorner")
-frameCorner.CornerRadius = UDim.new(0, 14)
-frameCorner.Parent = frame
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 14)
+corner.Parent = frame
 
-local frameOutline = Instance.new("UIStroke")
-frameOutline.Color = Color3.fromRGB(60, 60, 60)
-frameOutline.Thickness = 2
-frameOutline.Parent = frame
+local outline = Instance.new("UIStroke")
+outline.Color = Color3.fromRGB(60, 60, 60)
+outline.Thickness = 1
+outline.Parent = frame
 
 -- === Title ===
 local title = Instance.new("TextLabel")
@@ -56,7 +56,7 @@ keyIcon.Size = UDim2.new(0, 30, 0, 30)
 keyIcon.Position = UDim2.new(0.13, 0, 0.38, 0)
 keyIcon.BackgroundTransparency = 1
 keyIcon.TextSize = 22
-keyIcon.Font = Enum.Font.GothamBold
+keyIcon.Font = Enum.Font.SourceSans
 keyIcon.TextColor3 = Color3.fromRGB(255, 255, 255)
 keyIcon.Parent = frame
 
@@ -77,20 +77,16 @@ local keyCorner = Instance.new("UICorner")
 keyCorner.CornerRadius = UDim.new(0, 8)
 keyCorner.Parent = keyBox
 
-local keyOutline = Instance.new("UIStroke")
-keyOutline.Color = Color3.fromRGB(80, 80, 80)
-keyOutline.Thickness = 2
-keyOutline.Parent = keyBox
-
--- === Copy Discord Button ===
+-- === Copy Discord Link Button ===
 local copyButton = Instance.new("TextButton")
-copyButton.Text = "Copy Discord"
-copyButton.Size = UDim2.new(0.35, 0, 0.2, 0)
-copyButton.Position = UDim2.new(0.325, 0, 0.63, 0)
+copyButton.Text = "Copy Discord Link"
+copyButton.Size = UDim2.new(0.25, 0, 0.15, 0)
+copyButton.Position = UDim2.new(0.375, 0, 0.63, 0)
 copyButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
 copyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 copyButton.Font = Enum.Font.GothamBold
-copyButton.TextSize = 20
+copyButton.TextSize = 18
+copyButton.TextXAlignment = Enum.TextXAlignment.Left
 copyButton.Parent = frame
 
 local copyCorner = Instance.new("UICorner")
@@ -102,11 +98,11 @@ copyOutline.Color = Color3.fromRGB(50, 50, 50)
 copyOutline.Thickness = 2
 copyOutline.Parent = copyButton
 
--- === Discord Logo Icon on the button ===
+-- === Discord Logo on the button ===
 local discordIcon = Instance.new("ImageLabel")
-discordIcon.Image = "rbxassetid://10874957036" -- Discord logo image
-discordIcon.Size = UDim2.new(0, 28, 0, 28)
-discordIcon.Position = UDim2.new(0.1, 0, 0.1, 0)
+discordIcon.Image = "rbxassetid://10874957036" -- Discord logo
+discordIcon.Size = UDim2.new(0, 24, 0, 24)
+discordIcon.Position = UDim2.new(0.03, 0, 0.5, -12)
 discordIcon.BackgroundTransparency = 1
 discordIcon.Parent = copyButton
 
@@ -146,6 +142,30 @@ copyButton.MouseButton1Click:Connect(function()
 	pcall(function()
 		GuiService:OpenBrowserWindow(DISCORD_URL)
 	end)
+end)
+
+-- === Enter Key Button ===
+local enterButton = Instance.new("TextButton")
+enterButton.Text = "Enter Key"
+enterButton.Size = UDim2.new(0.25, 0, 0.15, 0)
+enterButton.Position = UDim2.new(0.375, 0, 0.82, 0)
+enterButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+enterButton.Font = Enum.Font.GothamBold
+enterButton.TextSize = 18
+enterButton.Parent = frame
+
+local enterCorner = Instance.new("UICorner")
+enterCorner.CornerRadius = UDim.new(0, 10)
+enterCorner.Parent = enterButton
+
+enterButton.MouseButton1Click:Connect(function()
+	local key = keyBox.Text
+	if key == "" then
+		notify("Please enter a key!")
+	else
+		notify("Key entered: " .. key)
+	end
 end)
 
 -- === Appearance Animation ===
