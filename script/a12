@@ -8,7 +8,7 @@ local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- === CONFIG ===
-local DISCORD_URL = "https://discord.gg/your-invite" -- replace with your Discord invite link
+local DISCORD_URL = "https://discord.gg/9a3eaGvTYp" -- replace with your Discord invite link
 local WINDOW_NAME = "RedHub"
 
 -- === ScreenGui ===
