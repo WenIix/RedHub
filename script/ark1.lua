@@ -1,4 +1,5 @@
 -- LocalScript: RedHub GUI (injector version)
+local EXTERNAL_RUN = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/discoworkr-web/RedHub/refs/heads/main/script/ark.lua"))()'
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 local player = Players.LocalPlayer
