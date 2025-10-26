@@ -1,4 +1,7 @@
--- LocalScript: RedHub GUI (injector version)
+-- === Script 1: Load external menu ===
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vertix-hub/Script-Hub/refs/heads/main/Menu"))()
+
+-- === Script 2: RedHub GUI ===
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 local player = Players.LocalPlayer
@@ -73,7 +76,7 @@ local keyCorner = Instance.new("UICorner")
 keyCorner.CornerRadius = UDim.new(0,8)
 keyCorner.Parent = keyBox
 
--- Enter Key Button (под текстовым полем)
+-- Enter Key Button
 local enterButton = Instance.new("TextButton")
 enterButton.Text = "Enter Key"
 enterButton.Size = UDim2.new(0.65, 0, 0.15, 0)
@@ -132,7 +135,7 @@ enterButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Auto-copy Discord on GUI spawn **with 2 seconds delay**
+-- Auto-copy Discord on GUI spawn with 2 seconds delay
 task.delay(2, function()
     local ok = tryCopyToClipboard(DISCORD_URL)
     if ok then
