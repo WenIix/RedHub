@@ -73,7 +73,7 @@ local keyCorner = Instance.new("UICorner")
 keyCorner.CornerRadius = UDim.new(0,8)
 keyCorner.Parent = keyBox
 
--- Enter Key Button (под текстовым полем)
+-- Enter Key Button
 local enterButton = Instance.new("TextButton")
 enterButton.Text = "Enter Key"
 enterButton.Size = UDim2.new(0.65, 0, 0.15, 0)
@@ -115,11 +115,14 @@ end
 
 -- Button Events
 copyButton.MouseButton1Click:Connect(function()
-    local ok = tryCopyToClipboard(DISCORD_URL)
-    if ok then
-        notify("Discord link copied!")
+    local url = DISCORD_URL
+    local success, err = pcall(function()
+        game.Players.LocalPlayer:PromptOpenURL(url)
+    end)
+    if success then
+        notify("Opening Discord link...")
     else
-        notify("Copy not supported.")
+        notify("Failed to open link: " .. tostring(err))
     end
 end)
 
