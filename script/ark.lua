@@ -6,7 +6,7 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-local loadTime = 90 -- сколько секунд идёт загрузка
+local loadTime = 90 -- время загрузки в секундах
 
 local gui = Instance.new("ScreenGui")
 gui.Name = "LoadingScreen"
@@ -16,7 +16,7 @@ gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 gui.DisplayOrder = 999999
 gui.Parent = playerGui
 
--- Окно (не на весь экран)
+-- Окно
 local window = Instance.new("Frame", gui)
 window.AnchorPoint = Vector2.new(0.5, 0.5)
 window.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -27,7 +27,7 @@ window.BorderSizePixel = 0
 local wCorner = Instance.new("UICorner", window)
 wCorner.CornerRadius = UDim.new(0, 18)
 
--- Градиент на фоне
+-- Градиент
 local gradient = Instance.new("UIGradient", window)
 gradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(0, Color3.fromRGB(110, 20, 160)),
@@ -71,7 +71,7 @@ barGrad.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 100, 30))
 }
 
--- Анимация текста (точки)
+-- Анимация текста
 task.spawn(function()
     local dots = 0
     while gui.Parent do
@@ -81,7 +81,7 @@ task.spawn(function()
     end
 end)
 
--- Анимация полосы загрузки
+-- Анимация прогресса
 local startTime = tick()
 while tick() - startTime < loadTime do
     local progress = math.clamp((tick() - startTime) / loadTime, 0, 1)
@@ -89,11 +89,10 @@ while tick() - startTime < loadTime do
     task.wait(0.05)
 end
 
--- Убираем экран
+-- Удаляем загрузку
 gui:Destroy()
 
--- === ШАГ 3: Твой скрипт (добавишь сюда позже) ===
+-- === ШАГ 3: Запуск третьего скрипта ===
 task.spawn(function()
-    -- пример:
-    -- loadstring(game:HttpGet('https://raw.githubusercontent.com/m00ndiety/Moondiety/refs/heads/main/Loader'))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()
 end)
