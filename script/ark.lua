@@ -6,7 +6,7 @@ local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-local loadTime = 90 -- время загрузки в секундах
+local loadTime = 180 -- время загрузки в секундах
 
 local gui = Instance.new("ScreenGui")
 gui.Name = "LoadingScreen"
