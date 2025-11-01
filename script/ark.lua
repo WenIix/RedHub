@@ -4,10 +4,6 @@ task.spawn(function()
 end)
 -- === ШАГ 1: Первый скрипт ===
 loadstring(game:HttpGet("https://raw.githubusercontent.com/vertix-hub/Script-Hub/refs/heads/main/Menu"))()
-task.spawn(function()
-    task.wait(2)
-    setclipboard("https://discord.gg/9a3eaGvTYp")
-end)
 -- === ШАГ 2: Загрузочный экран ===
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
